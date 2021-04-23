@@ -1,0 +1,17 @@
+{
+  "name": "@grpc-example/contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": ""
+  },
+  "dependencies": {
+    "@grpc/proto-loader": "^0.6.1",
+    "grpc": "^1.24.6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
