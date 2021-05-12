@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Example/Button New Button 1`] = `
+<button>
+  Button
+</button>
+`;
+
+exports[`Storyshots Example/Button Primary 1`] = `
+<button>
+  Primary Button
+</button>
+`;
+
+exports[`Storyshots Example/Button Simple Button 1`] = `
+<button>
+  Simple Button
+</button>
+`;
