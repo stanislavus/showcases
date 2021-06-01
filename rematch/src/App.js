@@ -25,7 +25,6 @@ class Renderer {
   }
 
   renderRect(data) {
-    console.log(data.color, data.x, data.y, data.width, data.height);
     this.ctx.fillStyle = data.color;
     this.ctx.fillRect(data.x, data.y, data.width, data.height);
   }
@@ -65,13 +64,18 @@ class Capturer {
   }
 }
 
-function App({ shapes, addShape, reset }) {
+function App({ shapes, addShape, reset, loadShapes, saveShapes }) {
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   const [renderer, setRenderer] = useState(null);
   const [capturer, setCapturer] = useState(null);
   const [selectedShape, selectShape] = useState(SHAPE_TYPES.RECT);
   const [selectedColor, selectColor] = useState(COLORS.GREEN);
+
+  useEffect(() => {
+    window.addEventListener('load', () => loadShapes());
+    window.addEventListener('beforeunload', () => saveShapes());
+  });
   
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -83,11 +87,9 @@ function App({ shapes, addShape, reset }) {
 
 
   useEffect(() => {
-    console.log(shapes, ctx, renderer);
     if (!ctx) return;
     ctx.clearRect(0, 0, canvasRef.current.clientWidth, canvasRef.current.clientHeight);
     shapes.forEach(({type, data}) => {
-      console.log(type, data);
       renderer.render(type, data);
     });
   }, [shapes, ctx, renderer]);
@@ -115,9 +117,11 @@ const mapStateToProps = (state) => ({
   shapes: state.main.get('shapes').toArray(),
 });
 
-const mapDispatchToProps = ({main: { addShape, reset }}) => ({
+const mapDispatchToProps = ({main: { addShape, reset, saveShapes, loadShapes }}) => ({
   addShape,
   reset,
+  saveShapes,
+  loadShapes,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
